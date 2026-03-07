@@ -10,7 +10,6 @@ const messages = {
     week: '5 Days',
     deleteConfirm: 'Are you sure you want to delete this block?',
     maxFavorites: 'To add, please remove a city. Max 5 favorites allowed.',
-    loading: 'Loading...',
     now: 'Now',
     hourlyTemp: 'Hourly Temp',
     dailyAvgTemp: 'Daily Avg',
@@ -20,7 +19,8 @@ const messages = {
     addToFavorites: 'Add to favorites',
     removeFromFavorites: 'Remove from favorites',
     errorLoadingWeather: 'Error loading weather:',
-    weatherIcon: 'Weather icon'
+    weatherIcon: 'Weather icon',
+    cityNotFound: 'City not found'
   },
   uk: {
     search: 'Пошук міста...',
@@ -31,7 +31,6 @@ const messages = {
     week: '5 Днів',
     deleteConfirm: 'Ви впевнені, що хочете видалити цей блок?',
     maxFavorites: 'Для додавання видаліть місто. Максимум 5 обраних.',
-    loading: 'Завантаження...',
     now: 'Зараз',
     hourlyTemp: 'Погодинна температура',
     dailyAvgTemp: 'Щоденна середня температура',
@@ -41,7 +40,8 @@ const messages = {
     addToFavorites: 'Додати до обраного',
     removeFromFavorites: 'Видалити з вибраного',
     errorLoadingWeather: 'Помилка завантаження погоди:',
-    weatherIcon: 'Значок погоди'
+    weatherIcon: 'Значок погоди',
+    cityNotFound: 'Місто не знайдено'
   }
 };
 

@@ -121,11 +121,17 @@ async function fetchCityWeather() {
   isLoading.value = true;
 
   try {
-    const defaultCity = await searchCities(
+    const results = await searchCities(
       currentCity.value?.name || props.initialCity,
       locale.value
     );
-    const { local_names, ...city } = defaultCity[0];
+
+    if (!results || results.length === 0) {
+      new Error(t('cityNotFound'));
+    }
+
+    const defaultCity = results[0] as City;
+    const { local_names, ...city } = defaultCity;
     currentCity.value = city;
 
     rawWeatherData.value = await getWeatherForecast(
