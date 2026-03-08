@@ -35,3 +35,14 @@ export function processFiveDay(list: WeatherItem[]): DailyWeather[] {
       };
     });
 }
+
+// Function to check if it is the same city (within 3 km)
+export function isSameLocation(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+) {
+  const threshold = 0.03;
+  return Math.abs(lat1 - lat2) < threshold && Math.abs(lon1 - lon2) < threshold;
+}

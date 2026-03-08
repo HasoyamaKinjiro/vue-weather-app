@@ -9,15 +9,9 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const GEO_URL = 'https://api.openweathermap.org/geo/1.0';
 
 export async function getCityByIp(): Promise<string> {
-  try {
-    const { data } = await axios.get<{ city: string }>(
-      'https://ipapi.co/json/'
-    );
-    return data.city || 'Kyiv';
-  } catch (error) {
-    console.log(error);
-    return 'Kyiv';
-  }
+  const { data } = await axios.get<{ city: string }>('https://ipapi.co/json/');
+
+  return data.city;
 }
 
 export async function searchCities(

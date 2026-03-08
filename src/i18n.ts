@@ -20,7 +20,9 @@ const messages = {
     removeFromFavorites: 'Remove from favorites',
     errorLoadingWeather: 'Error loading weather:',
     weatherIcon: 'Weather icon',
-    cityNotFound: 'City not found'
+    cityNotFound: 'City not found',
+    defaultCityNameError: 'Error getting city by IP:',
+    searchFailed: 'Search failed:'
   },
   uk: {
     search: 'Пошук міста...',
@@ -41,7 +43,9 @@ const messages = {
     removeFromFavorites: 'Видалити з вибраного',
     errorLoadingWeather: 'Помилка завантаження погоди:',
     weatherIcon: 'Значок погоди',
-    cityNotFound: 'Місто не знайдено'
+    cityNotFound: 'Місто не знайдено',
+    defaultCityNameError: 'Помилка отримання міста за IP:',
+    searchFailed: 'Помилка пошуку:'
   }
 };
 

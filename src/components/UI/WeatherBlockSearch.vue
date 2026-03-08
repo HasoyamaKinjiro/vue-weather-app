@@ -17,7 +17,11 @@ const selectCity = (city: City) => {
   <div class="search-box">
     <input v-model="model" @input="onSearch" :placeholder="$t('search')" />
     <ul v-if="searchResults.length" class="autocomplete">
-      <li v-for="res in searchResults" :key="res.lat" @click="selectCity(res)">
+      <li
+        v-for="(res, index) in searchResults"
+        :key="index"
+        @click="selectCity(res)"
+      >
         {{ res.name }}, {{ res.country }}
       </li>
     </ul>

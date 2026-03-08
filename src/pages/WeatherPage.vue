@@ -1,25 +1,22 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { BaseModal, UiButton, WeatherBlock } from '../components';
+import { BaseModal, UiButton, UiLoader, WeatherBlock } from '../components';
 import { getCityByIp } from '../api/weather';
+import { useI18n } from 'vue-i18n';
 
 interface Block {
   id: number;
   name: string;
 }
 
+const { t } = useI18n();
+
 const blocks = ref<Block[]>([]);
 const showDeleteModal = ref<boolean>(false);
 const blockToDelete = ref<number | null>(null);
+const isLoading = ref<boolean>(false);
 
-onMounted(async () => {
-  const defaultCityName = await getCityByIp();
-
-  blocks.value.push({
-    id: Date.now(),
-    name: defaultCityName || ''
-  });
-});
+onMounted(getDefaultCityName);
 
 const addBlock = () => {
   if (blocks.value.length < 5) {
@@ -39,10 +36,29 @@ const deleteBlock = () => {
   showDeleteModal.value = false;
   blockToDelete.value = null;
 };
+
+async function getDefaultCityName() {
+  let defaultCityName = '';
+
+  try {
+    isLoading.value = true;
+    defaultCityName = await getCityByIp();
+  } catch (error) {
+    console.error(t('defaultCityNameError'), error);
+    defaultCityName = 'Kyiv';
+  } finally {
+    isLoading.value = false;
+    blocks.value.push({
+      id: Date.now(),
+      name: defaultCityName
+    });
+  }
+}
 </script>
 
 <template>
   <div class="weather-wrapper">
+    <UiLoader :is-loading="isLoading" />
     <WeatherBlock
       v-for="block in blocks"
       :key="block.id"

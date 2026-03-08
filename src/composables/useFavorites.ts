@@ -1,5 +1,6 @@
 import { useLocalStorage } from '@vueuse/core';
 import type { City } from '../types/weather.ts';
+import { isSameLocation } from '../utils';
 
 const MAX_FAVORITES = 5;
 
@@ -7,7 +8,9 @@ const favorites = useLocalStorage<City[]>('favorites', []);
 
 export function useFavorites() {
   const isFavorite = (lat: number, lon: number) => {
-    return favorites.value.some((city) => city.lat === lat && city.lon === lon);
+    return favorites.value.some((city) =>
+      isSameLocation(city.lat, city.lon, lat, lon)
+    );
   };
 
   const toggleFavorite = (city: City) => {

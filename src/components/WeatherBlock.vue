@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { searchCities, getWeatherForecast } from '../api/weather';
+import { getWeatherForecast, searchCities } from '../api/weather';
 import { processFiveDay } from '../utils';
 import {
-  WeatherChart,
-  WeatherBlockSearch,
   BaseModal,
   UiButton,
-  UiLoader
+  UiLoader,
+  WeatherBlockSearch,
+  WeatherChart
 } from '../components';
 import type { City, DailyWeather, WeatherResponse } from '../types/weather.ts';
 import { useFavorites } from '../composables/useFavorites.ts';
@@ -90,8 +90,19 @@ const chartData = computed<{ labels: string[]; data: number[] }>(() => {
 
 const onSearch = () => {
   clearTimeout(timeout);
+
   timeout = setTimeout(async () => {
-    searchResults.value = await searchCities(searchQuery.value, locale.value);
+    if (!searchQuery.value.trim()) {
+      searchResults.value = [];
+      return;
+    }
+
+    try {
+      searchResults.value = await searchCities(searchQuery.value, locale.value);
+    } catch (error) {
+      console.error(t('searchFailed'), error);
+      searchResults.value = [];
+    }
   }, 400);
 };
 
