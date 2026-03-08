@@ -14,8 +14,8 @@ export function useFavorites() {
   };
 
   const toggleFavorite = (city: City) => {
-    const index = favorites.value.findIndex(
-      (c) => c.lat === city.lat && c.lon === city.lon
+    const index = favorites.value.findIndex((c) =>
+      isSameLocation(c.lat, c.lon, city.lat, city.lon)
     );
 
     if (index !== -1) {

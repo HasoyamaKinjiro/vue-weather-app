@@ -12,7 +12,7 @@ const { favorites } = useFavorites();
     <div class="favorites-page__wrapper">
       <WeatherBlock
         v-for="(cityObj, index) in favorites"
-        :key="index"
+        :key="`${cityObj.lat}-${index}`"
         :initial-city="cityObj.name"
         :is-favorite-tab="true"
       />
